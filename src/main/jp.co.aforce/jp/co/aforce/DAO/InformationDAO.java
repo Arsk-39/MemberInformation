@@ -64,7 +64,8 @@ public class InformationDAO extends DAO{
 		Connection con=getConnection();
 		
 		PreparedStatement st=con.prepareStatement(
-				"UPDATE member SET LAST_NAME=?,FARST_NAME=?,SEX=?,BIRTH_YEAR=?,BIRTH_MONTH=?,BIRTH_DAY=?,PHONE_NUMBER=?,MAIL_ADDRESS=?,JOB=? WHERE MEMBER_ID=?");
+				"UPDATE member SET LAST_NAME=?,FARST_NAME=?,SEX=?,BIRTH_YEAR=?,"
+				+ "BIRTH_MONTH=?,BIRTH_DAY=?,PHONE_NUMBER=?,MAIL_ADDRESS=?,JOB=? WHERE MEMBER_ID=?");
 		st.setString(1, MemberInformation.getLname());
 		st.setString(2, MemberInformation.getFname());
 		st.setString(3, MemberInformation.getSex());
@@ -75,11 +76,11 @@ public class InformationDAO extends DAO{
 		st.setString(8, MemberInformation.getMail());
 		st.setString(9, MemberInformation.getJob());
 		st.setString(10, MemberInformation.getId());
-		int update=st.executeUpdate();
+		int line=st.executeUpdate();
 		
 		st.close();
 		con.close();
-		return update;
+		return line;
 	}
 	public int delete(MemberInformation MemberInformation) throws Exception{
 		Connection con=getConnection();
@@ -87,11 +88,11 @@ public class InformationDAO extends DAO{
 		PreparedStatement st=con.prepareStatement(
 				"DELETE FROM member WHERE MEMEBR_ID = ?");
 		st.setString(1, MemberInformation.getId());
-		int delete=st.executeUpdate();
+		int line=st.executeUpdate();
 		
 		st.close();
 		con.close();
-		return delete;
+		return line;
 	}
 	}
 

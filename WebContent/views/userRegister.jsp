@@ -16,8 +16,8 @@
 <input type="radio" id="男" name="SEX" value="男" required checked>男
 <input type="radio" id="女" name="SEX" value="女" required>女<br>
 <p>■生年月日</p>
-<select name="birth_year">
-<option value="">-</option required>
+<select name="birth_year" required>
+<option value="">-</option >
 <option value="1920">1920</option>
 <option value="1921">1921</option>
 <option value="1922">1922</option>
