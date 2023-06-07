@@ -1,6 +1,8 @@
 package jp.co.aforce.Search;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import jp.co.aforce.DAO.InformationDAO;
 import jp.co.aforce.been.MemberInformation;
+import jp.co.aforce.tool.Page;
 
 /**
  * Servlet implementation class Search
@@ -32,30 +35,36 @@ public class Search extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	PrintWriter out=response.getWriter();
+	Page.header(out);
 	
-		HttpSession session=request.getSession();
-		String keyword=request.getParameter("keyword");
-		
+	try {
 		InformationDAO dao = new InformationDAO();
-		List<MemberInformation> MenberInformation;
-		try {
-			MenberInformation = dao.search(keyword);
-			if(MenberInformation != null) {
-				session.setAttribute("keyword", keyword);
-				request.getRequestDispatcher("/views/userUpdate2.jsp").forward(request, response);
-			}else {
-				session.setAttribute("errormsg", "ユーザIDが違うか、存在していません。");
-				response.sendRedirect("/views/userRegister.jsp");
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
+		MemberInformation p = new MemberInformation();
+		
+		List<MemberInformation> list =new ArrayList<>();
+		
+		list = dao.search(p.getId());
+		
+		HttpSession session=request.getSession();
+		session.setAttribute("keyword",list );
+		if(list!=null){
+			request.getRequestDispatcher("/views/userUpdate2.jsp").forward(request, response);
+		}else {
+			session.setAttribute("errormsg", "ユーザIDが違います。");
+			response.sendRedirect("/views/userUpdate.jsp");
 		}
+	}catch (Exception e) {
+		
+	}
 	}
 
 }
