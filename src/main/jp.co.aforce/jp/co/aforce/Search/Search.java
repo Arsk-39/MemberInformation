@@ -2,7 +2,6 @@ package jp.co.aforce.Search;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import jp.co.aforce.DAO.InformationDAO;
 import jp.co.aforce.been.MemberInformation;
@@ -47,24 +45,17 @@ public class Search extends HttpServlet {
 	Page.header(out);
 	
 	try {
-		InformationDAO dao = new InformationDAO();
-		MemberInformation p = new MemberInformation();
+		String member_Id = request.getParameter("kyeword");
+		InformationDAO DAO = new InformationDAO();
+		List<MemberInformation> list = DAO.search(member_Id);
 		
-		List<MemberInformation> list =new ArrayList<>();
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/views/userUpdate2.jsp").forward(request, response);
 		
-		list = dao.search(p.getId());
-		
-		HttpSession session=request.getSession();
-		session.setAttribute("keyword",list );
-		if(list!=null){
-			request.getRequestDispatcher("/views/userUpdate2.jsp").forward(request, response);
-		}else {
-			session.setAttribute("errormsg", "ユーザIDが違います。");
-			response.sendRedirect("/views/userUpdate.jsp");
-		}
 	}catch (Exception e) {
 		
 	}
+	Page.header(out);
 	}
 
 }
