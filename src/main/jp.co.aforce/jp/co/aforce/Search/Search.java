@@ -32,7 +32,6 @@ public class Search extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/MemberInformation/views/userUpdate.jsp");
 	}
 
 	/**
@@ -48,9 +47,8 @@ public class Search extends HttpServlet {
 		try {
 			MenberInformation = dao.search(keyword);
 			if(MenberInformation != null) {
-				session.setAttribute("existence", "IDを確認しました更新内容を記入してください。");
 				session.setAttribute("box", "keyword");
-				request.getRequestDispatcher("/views/userUpdate.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/userUpdate2.jsp").forward(request, response);
 			}else {
 				session.setAttribute("errormsg", "ユーザIDが違うか、存在していません。");
 				session.setAttribute("box", keyword);
