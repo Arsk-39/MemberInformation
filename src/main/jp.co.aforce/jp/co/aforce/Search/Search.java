@@ -54,7 +54,7 @@ public class Search extends HttpServlet {
 			}else {
 				session.setAttribute("errormsg", "ユーザIDが違うか、存在していません。");
 				session.setAttribute("box", keyword);
-				response.sendRedirect("/views/userUpdate.jsp");
+				response.sendRedirect("/views/userRegister.jsp");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
