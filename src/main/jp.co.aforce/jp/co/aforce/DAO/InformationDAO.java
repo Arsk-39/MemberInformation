@@ -16,8 +16,8 @@ public class InformationDAO extends DAO{
 		Connection con=getConnection();
 		
 		PreparedStatement st=con.prepareStatement(
-				"select * from member where MEMBER_ID like ?");
-		st.setString(1, "%"+keyword+"%");
+				"select * from member where MEMBER_ID = ?");
+		st.setString(1, keyword);
 		ResultSet rs=st.executeQuery();
 		
 		while (rs.next()) {
