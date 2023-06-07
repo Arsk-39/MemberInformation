@@ -10,35 +10,37 @@ import jp.co.aforce.been.MemberInformation;
 
 public class InformationDAO extends DAO{
 	
-	public List<MemberInformation> search(String keyword) throws Exception{
-		List<MemberInformation> list=new ArrayList<>();
-		
-		Connection con=getConnection();
-		
-		PreparedStatement st=con.prepareStatement(
-				"select * from member where MEMBER_ID = ?");
+	public List<MemberInformation> search(String keyword) throws Exception {
+
+		List<MemberInformation> list = new ArrayList<>();
+
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement(
+				"select * from member where member_id = ?");
 		st.setString(1, keyword);
-		ResultSet rs=st.executeQuery();
-		
+		ResultSet rs = st.executeQuery();
+
 		while (rs.next()) {
 			MemberInformation p = new MemberInformation();
-			p.setId(rs.getString("MEMBER_ID"));
+
+			p.setId(rs.getString("MEMEBR_ID"));
 			p.setLname(rs.getString("LAST_NAME"));
-			p.setFname(rs.getString("FARST_NAME"));
+			p.setFname(rs.getString("FAINAL_NAME"));
 			p.setSex(rs.getString("SEX"));
 			p.setByear(rs.getInt("BIRTH_YEAR"));
 			p.setBmonth(rs.getInt("BIRTH_MONTH"));
 			p.setBday(rs.getInt("BIRTH_DAY"));
+			p.setJob(rs.getString("JOB"));
 			p.setPnumber(rs.getString("PHONE_NUMBER"));
 			p.setMail(rs.getString("MAIL_ADDRESS"));
-			p.setJob(rs.getString("JOB"));
+			list.add(p);
 		}
-		
 		st.close();
 		con.close();
-		
 		return list;
-		}
+
+	}
 	public int insert(MemberInformation MemberInformation) throws Exception{
 		Connection con=getConnection();
 		

@@ -47,11 +47,10 @@ public class Search extends HttpServlet {
 		try {
 			MenberInformation = dao.search(keyword);
 			if(MenberInformation != null) {
-				session.setAttribute("box", "keyword");
+				session.setAttribute("keyword", keyword);
 				request.getRequestDispatcher("/views/userUpdate2.jsp").forward(request, response);
 			}else {
 				session.setAttribute("errormsg", "ユーザIDが違うか、存在していません。");
-				session.setAttribute("box", keyword);
 				response.sendRedirect("/views/userRegister.jsp");
 			}
 		}catch (Exception e) {
