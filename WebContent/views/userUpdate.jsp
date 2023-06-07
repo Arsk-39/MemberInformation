@@ -195,7 +195,7 @@ ID<input type="text" nmae="MEMBER_ID">
 <br>
 <input type="submit" value="更新" >
 <input type="reset" value="リセット" name="rest">
-<button onclick="location.href='/MemberInformation/views/ALLpage.jsp'">戻る</button>
 </form>
+<button onclick="location.href='/MemberInformation/views/ALLpage.jsp'">戻る</button>
 </body>
 </html>
