@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>更新内容を記入してください</p>
+<p>更新内容</p>
 </body>
 </html>

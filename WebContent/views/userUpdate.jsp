@@ -10,7 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <p>会員情報更新</p>
 <p>ID検索</p>
-<form action="/MemberInformation/views/search" method="post">
+<form action="Search" method="post">
 <input type="text" name="keyword">
 <input type="submit" value="検索" >
 <input type="reset" value="リセット" name="rest">

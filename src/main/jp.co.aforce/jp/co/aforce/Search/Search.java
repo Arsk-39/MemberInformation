@@ -2,7 +2,6 @@ package jp.co.aforce.Search;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,14 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jp.co.aforce.DAO.InformationDAO;
-import jp.co.aforce.been.MemberInformation;
 import jp.co.aforce.tool.Page;
 
 /**
  * Servlet implementation class Search
  */
-@WebServlet("/views/search")
+@WebServlet("/views/Search")
 public class Search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,12 +42,6 @@ public class Search extends HttpServlet {
 	Page.header(out);
 	
 	try {
-		String member_Id = request.getParameter("kyeword");
-		InformationDAO DAO = new InformationDAO();
-		List<MemberInformation> list = DAO.search(member_Id);
-		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/userUpdate2.jsp").forward(request, response);
 		
 	}catch (Exception e) {
 		
